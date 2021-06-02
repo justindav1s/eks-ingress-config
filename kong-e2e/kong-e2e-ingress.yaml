@@ -14,4 +14,4 @@ spec:
             - path: /*
               backend:
                 serviceName: e2e-kong-proxy
-                servicePort: 8000
+                servicePort: 80
