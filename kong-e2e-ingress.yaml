@@ -1,56 +1,18 @@
-# apiVersion: networking.k8s.io/v1beta1
-# kind: Ingress
-# metadata:
-#   name: kong-e2e-ingress
-#   annotations:
-#     kubernetes.io/ingress.class: alb
-#     alb.ingress.kubernetes.io/scheme: internet-facing
-#     alb.ingress.kubernetes.io/target-type: ip    
-#   namespace: kong-e2e
-# spec:
-#   rules:
-#       - http:
-#           paths:
-#             - path: /*
-#               backend:
-#                 serviceName: e2e-kong-proxy
-#                 servicePort: 80
-# ---                
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
 metadata:
-  name: kong-e2e-gateway
-  annotations:  
-    kubernetes.io/ingress.class: kong
-    konghq.com/preserve-host: "false"
+  name: kong-e2e-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip    
   namespace: kong-e2e
 spec:
-  selector:
-    istio: ingressgateway
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - "k8s-konge2e-konge2ei-461490a143-574160597.eu-west-2.elb.amazonaws.com"
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: kong-e2e-vs
-  namespace: kong-e2e
-spec:
-  hosts:
-  - "k8s-konge2e-konge2ei-461490a143-574160597.eu-west-2.elb.amazonaws.com"
-  gateways:
-  - kong-e2e-gateway
-  http:
-  - match:
-    - uri:
-        prefix: /
-    route:
-    - destination:
-        host: e2e-kong-proxy.kong-e2e.svc.cluster.local
-        port:
-          number: 80                
+  rules:
+      - http:
+          paths:
+            - path: /*
+              backend:
+                serviceName: e2e-kong-proxy
+                servicePort: 80
+---                

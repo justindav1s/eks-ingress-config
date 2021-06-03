@@ -1,0 +1,38 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: kong-staging-gateway
+  annotations:  
+    kubernetes.io/ingress.class: kong
+    konghq.com/preserve-host: "false"
+  namespace: kong-staging
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kong-staging-vs
+  namespace: kong-staging
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - kong-staging-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: staging-kong-proxy.kong-staging.svc.cluster.local
+        port:
+          number: 80   
