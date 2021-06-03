@@ -9,8 +9,7 @@ metadata:
   namespace: istio-system
 spec:
   rules:
-    - host: kiali.dev1.eks.openshiftlabs.net
-      http:       
+    - http:       
         paths:
           - path: /*
             backend:
