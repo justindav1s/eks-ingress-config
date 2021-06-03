@@ -10,6 +10,7 @@ metadata:
 spec:
   rules:
       - http:
+        host: kiali.dev1.eks.openshiftlabs.net
           paths:
             - path: /*
               backend:
