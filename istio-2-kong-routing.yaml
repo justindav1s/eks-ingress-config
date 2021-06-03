@@ -3,17 +3,18 @@ kind: Gateway
 metadata:
   name: kong-staging-gateway
   annotations:  
-    kubernetes.io/ingress.class: kong
-    konghq.com/preserve-host: "false"
   namespace: kong
 spec:
   selector:
     istio: ingressgateway
   servers:
   - port:
-      number: 80
-      name: http
-      protocol: HTTP
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: kong-tls-credentials        
     hosts:
     - "kong-staging.istio.dev1.eks.openshiftlabs.net"
 ---
@@ -30,9 +31,21 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /
+        prefix: /amazin
+    - uri:
+        prefix: /products        
     route:
     - destination:
         host: global-kong-proxy.kong.svc.cluster.local
         port:
           number: 80
+
+---
+apiVersion: "security.istio.io/v1beta1"
+kind: "PeerAuthentication"
+metadata:
+  name: default
+  namespace: kong
+spec:
+  mtls:
+    mode: STRICT
