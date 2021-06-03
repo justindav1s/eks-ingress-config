@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: kong-ing-http
+  name: kong-http
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip    
-  namespace: kong-dev
+  namespace: kong
 spec:
   rules:
       - http:
@@ -20,12 +20,12 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: kong-ing-tls
+  name: kong-tls
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip    
-  namespace: kong-dev
+  namespace: kong
 spec:
   rules:
       - http:
