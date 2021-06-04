@@ -4,10 +4,12 @@ metadata:
   name: kiali-ingress
   annotations:
     kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/load-balancer-name: kiali-alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-2:005459661421:certificate/546326b2-4ab5-4b31-aa5a-6492f09ab96d         
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-2:005459661421:certificate/546326b2-4ab5-4b31-aa5a-6492f09ab96d
+    alb.ingress.kubernetes.io/tags: cluster=dev1,kiali=kiali            
   namespace: istio-system
 spec:
   tls:
