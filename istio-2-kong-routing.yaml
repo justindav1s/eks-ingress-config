@@ -43,7 +43,7 @@ spec:
     - destination:
         host: global-kong-proxy.kong.svc.cluster.local
         port:
-          number: 80
+          number: 443
 
 ---
 apiVersion: "security.istio.io/v1beta1"
