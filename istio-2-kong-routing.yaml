@@ -51,11 +51,10 @@ spec:
   - "kong-staging.istio.dev1.eks.openshiftlabs.net"
   gateways:
   - kong-gateway
-  # - kong-http-gateway
   http:
   - match:
     - uri:
-        prefix: /products        
+        prefix: /        
     route:
     - destination:
         host: global-kong-proxy.kong.svc.cluster.local
