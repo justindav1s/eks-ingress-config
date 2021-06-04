@@ -2,7 +2,6 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: kong-tls-gateway
-  annotations:  
   namespace: kong
 spec:
   selector:
@@ -17,23 +16,23 @@ spec:
       credentialName: kong-tls-credentials        
     hosts:
     - "kong-staging.istio.dev1.eks.openshiftlabs.net"
----
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: kong-http-gateway
-  annotations:  
-  namespace: kong
-spec:
-  selector:
-    istio: ingressgateway
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP    
-    hosts:
-    - "kong-staging.istio.dev1.eks.openshiftlabs.net"
+# ---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: Gateway
+# metadata:
+#   name: kong-http-gateway
+#   annotations:  
+#   namespace: kong
+# spec:
+#   selector:
+#     istio: ingressgateway
+#   servers:
+#   - port:
+#       number: 80
+#       name: http
+#       protocol: HTTP    
+#     hosts:
+#     - "kong-staging.istio.dev1.eks.openshiftlabs.net"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
