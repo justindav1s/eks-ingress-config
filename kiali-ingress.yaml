@@ -12,7 +12,7 @@ metadata:
 spec:
   tls:
   - hosts:
-    - kiali.istio.dev1.eks.openshiftlabs.net
+    - kiali.dev1.eks.openshiftlabs.net
   rules:
     - http:       
         paths:
