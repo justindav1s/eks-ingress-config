@@ -44,8 +44,8 @@ spec:
   hosts:
   - "kong-staging.istio.dev1.eks.openshiftlabs.net"
   gateways:
-  - kong-tls-gateway
-  # - kong-http-gateway
+  # - kong-tls-gateway
+  - kong-http-gateway
   http:
   - match:
     - uri:
