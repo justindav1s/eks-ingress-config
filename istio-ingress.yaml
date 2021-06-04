@@ -30,7 +30,7 @@ spec:
           - path: /*
             backend:
               serviceName: istio-ingressgateway
-              servicePort: 80
+              servicePort: 443
 
 ---
 apiVersion: security.istio.io/v1beta1
