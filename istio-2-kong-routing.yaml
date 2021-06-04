@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: kong-tls-gateway
+  name: kong-gateway
   annotations:  
   namespace: kong
 spec:
@@ -16,47 +16,36 @@ spec:
       mode: SIMPLE
       credentialName: kong-tls-credentials        
     hosts:
+    - "kong-dev.istio.dev1.eks.openshiftlabs.net"
+    - "kong-e2e.istio.dev1.eks.openshiftlabs.net"
     - "kong-staging.istio.dev1.eks.openshiftlabs.net"
----
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: kong-http-gateway
-  annotations:  
-  namespace: kong
-spec:
-  selector:
-    istio: ingressgateway
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP    
-    hosts:
-    - "kong-staging.istio.dev1.eks.openshiftlabs.net"
+    - "kong-prd.istio.dev1.eks.openshiftlabs.net"
+
+
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: kong-vs
+  name: kong-virtualservices
   namespace: kong
 spec:
   hosts:
-  - "kong-staging.istio.dev1.eks.openshiftlabs.net"
+    - "kong-dev.istio.dev1.eks.openshiftlabs.net"
+    - "kong-e2e.istio.dev1.eks.openshiftlabs.net"
+    - "kong-staging.istio.dev1.eks.openshiftlabs.net"
+    - "kong-prd.istio.dev1.eks.openshiftlabs.net"
   gateways:
-  - kong-tls-gateway
-  - kong-http-gateway
+  - kong-gateway
   http:
   - match:
     - uri:
-        prefix: /amazin
-    - uri:
-        prefix: /products        
+        prefix: /      
     route:
     - destination:
         host: global-kong-proxy.kong.svc.cluster.local
         port:
           number: 80
+
 
 ---
 apiVersion: "security.istio.io/v1beta1"
