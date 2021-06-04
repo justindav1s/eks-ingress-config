@@ -5,9 +5,14 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip    
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-2:005459661421:certificate/546326b2-4ab5-4b31-aa5a-6492f09ab96d         
   namespace: istio-system
 spec:
+  tls:
+  - hosts:
+    - kiali.istio.dev1.eks.openshiftlabs.net
   rules:
     - http:       
         paths:
