@@ -20,6 +20,8 @@ spec:
     - kong-e2e.istio.dev1.eks.openshiftlabs.net
     - kong-staging.istio.dev1.eks.openshiftlabs.net
     - kong-prd.istio.dev1.eks.openshiftlabs.net
+    - kong-heroes-dev.istio.dev1.eks.openshiftlabs.net
+    - kong-heroes-e2e.istio.dev1.eks.openshiftlabs.net    
   rules:
     - http:       
         paths:
