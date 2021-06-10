@@ -19,6 +19,8 @@ spec:
     - kong-e2e.istio.dev1.eks.openshiftlabs.net
     - kong-staging.istio.dev1.eks.openshiftlabs.net
     - kong-prd.istio.dev1.eks.openshiftlabs.net
+    - kong-heroes-dev.istio.dev1.eks.openshiftlabs.net
+    - kong-heroes-e2e.istio.dev1.eks.openshiftlabs.net     
   - port:
       number: 80
       name: http
@@ -28,7 +30,8 @@ spec:
     - kong-e2e.istio.dev1.eks.openshiftlabs.net
     - kong-staging.istio.dev1.eks.openshiftlabs.net
     - kong-prd.istio.dev1.eks.openshiftlabs.net
-
+    - kong-heroes-dev.istio.dev1.eks.openshiftlabs.net
+    - kong-heroes-e2e.istio.dev1.eks.openshiftlabs.net 
 
 ---
 apiVersion: networking.istio.io/v1alpha3
@@ -42,6 +45,8 @@ spec:
     - kong-e2e.istio.dev1.eks.openshiftlabs.net
     - kong-staging.istio.dev1.eks.openshiftlabs.net
     - kong-prd.istio.dev1.eks.openshiftlabs.net
+    - kong-heroes-dev.istio.dev1.eks.openshiftlabs.net
+    - kong-heroes-e2e.istio.dev1.eks.openshiftlabs.net    
   gateways:
   - kong-gateway
   http:
